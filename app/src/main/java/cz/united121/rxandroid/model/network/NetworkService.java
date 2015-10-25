@@ -17,7 +17,7 @@ public interface NetworkService {
 	String TEST_ENDPOINT = "http://jsonplaceholder.typicode.com/";
 
 
-	static <T> T createService(final Class<T> tClass, final String endPoint) {
+	static <T> T createNetworkService(final Class<T> tClass, final String endPoint) {
 		Retrofit retrofit = new Retrofit.Builder()
 				.baseUrl(endPoint)
 				.build();
@@ -26,8 +26,8 @@ public interface NetworkService {
 	}
 
 	@GET("posts")
-	Observable<List<TestObject>> test();
+	Observable<List<TestObject>> getAllPosts();
 
 	@GET("posts/{id}")
-	Observable<TestObject> testOneObject(@Path("id") int id);
+	Observable<TestObject> getPostByID(@Path("id") int id);
 }

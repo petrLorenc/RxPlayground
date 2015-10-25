@@ -8,4 +8,6 @@ import rx.Observable;
  **/
 public interface IRecyclerPresenter {
 	void textChangedOnEditView(Observable<? extends String> observable);
+
+	void updateRecyclerViewClick();
 }

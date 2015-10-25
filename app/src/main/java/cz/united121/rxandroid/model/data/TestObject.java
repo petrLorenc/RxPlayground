@@ -1,7 +1,7 @@
 package cz.united121.rxandroid.model.data;
 
 /**
- * TODO add class description
+ * POJO test obejct
  * Created by Petr Lorenc[Lorenc55Petr@seznam.cz] on {10/25/2015}
  **/
 public class TestObject {
