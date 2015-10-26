@@ -5,11 +5,9 @@ import android.util.Log;
 import java.util.List;
 
 import cz.united121.rxandroid.model.data.TestObject;
+import cz.united121.rxandroid.model.network.NetworkManager;
 import cz.united121.rxandroid.model.network.NetworkService;
 import cz.united121.rxandroid.model.recyclerModel.listener.OnUpdateData;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -25,15 +23,8 @@ public class RecyclerModel implements IRecyclerModel {
 	public void updateDataToDatabase(OnUpdateData onUpdateData) {
 		Log.d(TAG, "updateDataToDatabase");
 
-		Retrofit retrofit = new Retrofit.Builder()
-				.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-				.addConverterFactory(GsonConverterFactory.create())
-				.baseUrl(NetworkService.TEST_ENDPOINT)
-				.build();
-		NetworkService service = retrofit.create(NetworkService.class);
-
-		//NetworkService networkService = NetworkService.createNetworkService(NetworkService.class, NetworkService.TEST_ENDPOINT);
-		service.getAllPosts()
+		NetworkService networkService = NetworkManager.createNetworkService(NetworkService.class, NetworkService.TEST_ENDPOINT);
+		networkService.getAllPosts()
 				.subscribeOn(Schedulers.newThread())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(new Subscriber<List<TestObject>>() {
